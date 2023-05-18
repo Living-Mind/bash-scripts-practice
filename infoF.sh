@@ -1,20 +1,28 @@
 #!/bin/bash
+#
 
-if [[ $1 == "-n" ]];
+if [[ $# -ne 2 ]]
 then
-	echo "$USER" > $2
+	echo "Only two arguments are required!" >&2
+	exit 1
+fi
 
-elif [[ $1 == "-l" ]];
+if [[ $1 == "-n" ]]
 then
-	echo "$PWD" > $2
-
-elif [[ $1 == "-t" ]];
+	whoami > $2
+elif
+	[[ $1 == "-l" ]]
 then
-	echo "$(date)" > $2
-
-elif [[ $1 == "-c" ]];
+	pwd > $2
+elif
+	[[ $1 == "-t" ]]
 then
-	echo "$(cal)" > $2
+	date > $2
+elif
+	[[ $1 == "-c" ]]
+then
+	cal > $2
 else
-	echo "Invalid argument"
+	echo "Invalid argument" >&2
+	exit 1
 fi
